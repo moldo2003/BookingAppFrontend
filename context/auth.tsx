@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }   
         if(!user && rootSegment[0] !== "(auth)"){
             router.replace("/(auth)/login");
-         }else if(user && rootSegment[0] !== "(app)"){
+         }else if(user && rootSegment[0] === "(auth)"){
             router.replace("/");
          }
 

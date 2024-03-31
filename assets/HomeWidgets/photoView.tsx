@@ -14,7 +14,6 @@ import Carousel from "react-native-snap-carousel";
 
 export const CarouselWidget = () => {
   const [images, setImages] = useState<string[]>([]);
-  const test = [1, 2, 3, 4, 5];
 
   useEffect(() => {
     const fetchImagesData = async () => {

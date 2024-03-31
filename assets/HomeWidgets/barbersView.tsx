@@ -2,6 +2,7 @@ import { Barber } from "@/Models/barberModel";
 import Colors from "@/constants/Colors";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
 import userApiService, { baseURL } from "@/services/userApiService";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -11,6 +12,7 @@ import {
   Image,
   Dimensions,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 
 export default function BarbersView() {
@@ -31,40 +33,52 @@ export default function BarbersView() {
   }, []);
 
   const renderitem = ({ barber, index }: { barber: Barber; index: number }) => {
+    let imgUrl = baseURL + "/images/" + barber.profilePic
+    
+    if(barber.profilePic == ""){
+       imgUrl = "https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg";
+    }
     return (
-      <View style={style.barberviewcontainer}>
-        <Image
-          style={style.image}
-          source={{ uri: baseURL + "/images/" + barber.profilePic }}
-        />
-        <View>
-          <Text style={style.barbernametext}>{barber.username}</Text>
-          <Text style={style.barberdescriptiontext}>
-            {barber.smallDescription}
-          </Text>
+      <Pressable onPress={() => {router.push(`/(profile)/${barber.firebaseUid}`)}}>
+        <View style={style.barberviewcontainer}>
+          <Image
+            style={style.image}
+            source={{ uri: imgUrl }}
+          />
+          <View>
+            <Text style={style.barbernametext}>{barber.username}</Text>
+            <Text style={style.barberdescriptiontext}>
+              {barber.smallDescription}
+            </Text>
+          </View>
         </View>
-      </View>
+      </Pressable>
     );
   };
 
   return (
-    <Pressable>
-      <View>
-        <Text style={style.titletext}>Our Barbers</Text>
-        {barbers.length > 0 && (
-          <FlatList
-            keyExtractor={(item) => item.username}
-            data={barbers}
-            renderItem={({ item, index }) =>
-              renderitem({ barber: item, index })
-            }
-          />
-        )}
-      </View>
-    </Pressable>
+    barbers.length===0 ? (
+      <ActivityIndicator size="large" color="white" /> // This is the loading screen
+    ) : (
+    <View style={{ flex: 1 }}>
+      <Text style={style.titletext}>Our Barbers</Text>
+      {barbers.length > 0 && (
+        <FlatList
+          keyExtractor={(item) => item.firebaseUid}
+          data={barbers}
+          renderItem={({ item, index }) =>
+            renderitem({ barber: item, index })
+          }
+        />
+      )}
+    </View>
+    )
   );
 }
 const style = StyleSheet.create({
+  container:{
+      height: 400,
+  },
   titletext: {
     fontSize: 20,
     fontWeight: "bold",
