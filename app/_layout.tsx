@@ -2,6 +2,7 @@ import { AuthProvider } from "@/context/auth";
 import { useFonts } from "expo-font";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import React, { useCallback } from "react";
+import Toast from "react-native-toast-message";
 
 export default function Layout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -19,6 +20,7 @@ export default function Layout() {
   }
 
   return (
+    
     <AuthProvider>
       <Stack
         screenOptions={{
@@ -26,9 +28,10 @@ export default function Layout() {
           animation: "slide_from_bottom",
           animationDuration: 30,
         }}
-      >
+      > 
         <Stack.Screen name="(app)" options={{ animation: "ios" }} />
-      </Stack>
+      </Stack> 
     </AuthProvider>
+  
   );
 }

@@ -1,5 +1,6 @@
 import Colors from "@/constants/Colors";
 import { Barber } from "@/Models/barberModel";
+import { router } from "expo-router";
 import { View, Text, Pressable, StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 export default function BarberDescription({ barber }: { barber: Barber }) {
@@ -7,7 +8,7 @@ export default function BarberDescription({ barber }: { barber: Barber }) {
     <View style={styles.container}>
       <Text style={styles.title}>{barber.username}</Text>
       <Text style={styles.secondTitiel}>{barber.smallDescription}</Text>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={() => router.push(`/(booking)/(tabs)/serviceselect/${barber.firebaseUid}`)}>
         <Text style={styles.text}>Book Now</Text>
       </Pressable>
       <Text style={styles.title}>About</Text>

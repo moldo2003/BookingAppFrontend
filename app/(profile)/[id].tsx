@@ -7,7 +7,14 @@ import userApiService, { baseURL } from "@/services/userApiService";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  Dimensions,
+  ActivityIndicator,
+} from "react-native";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -34,32 +41,33 @@ export default function BarberProfile() {
     fetchBarber();
   }, []);
   return (
-    barber && (
-      <SafeAreaView style={styles.container}>
-        <Pressable
-          onPress={() => {
-            router.push("/(app)/");
-          }}
-        >
-          <View style={styles.header}>
-            <Ionicons
-              style={{ position: "absolute", left: 10 }}
-              name="arrow-back"
-              size={24}
-              color="white"
-            />
-            <Text style={styles.headertext}>Profile</Text>
-          </View>
-        </Pressable>
-        <Image
-          style={styles.avatar}
-          source={{ uri: baseURL + "/images/" + barber?.profilePic }} // replace with your image URL
-        />
-
-        <BarberDescription barber={barber} />
-        <BarberGallery barber={barber} />
-      </SafeAreaView>
-    )
+    <SafeAreaView style={styles.container}>
+      {barber && (
+        <>
+          <Pressable
+            onPress={() => {
+              router.push("/(app)/");
+            }}
+          >
+            <View style={styles.header}>
+              <Ionicons
+                style={{ position: "absolute", left: 10 }}
+                name="arrow-back"
+                size={24}
+                color="white"
+              />
+              <Text style={styles.headertext}>Profile</Text>
+            </View>
+          </Pressable>
+          <Image
+            style={styles.avatar}
+            source={{ uri: baseURL + "/images/" + barber?.profilePic }} // replace with your image URL
+          />
+          <BarberDescription barber={barber as Barber} />
+          <BarberGallery barber={barber as Barber} />
+        </>
+      )}
+    </SafeAreaView>
   );
 }
 

@@ -7,7 +7,20 @@ export class Time {
         this.hour = hour;
         this.minute = minute;
     }
-
+    
+    static fromJson(json: any): Time {
+        return new Time(
+          json.hour,
+          json.minute
+        );
+      }
+    
+      toJson(): any {
+        return {
+          hour: this.hour,
+          minute: this.minute
+        };
+      }
     static compare(a : Time , b :Time): number {
         if (a.hour !== b.hour) {
             return a.hour - b.hour;
@@ -41,6 +54,20 @@ export class WorkDay {
         this.month = month;
         this.year = year;
     }
+    static fromJson(json: any): WorkDay {
+        return new WorkDay(
+          json.day,
+          json.month,
+          json.year
+        );
+      }
+      toJson(): any {
+        return {
+          day: this.day,
+          month: this.month,
+          year: this.year
+        };
+      }
 }
 
 export interface Appointment{

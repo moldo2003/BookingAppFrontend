@@ -75,14 +75,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  button: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: height * 0.06,
-    borderRadius: 10,
-    margin: 10,
-    backgroundColor: Colors.buttonColor,
-  },
+
   button2: {
     alignItems: "center",
     justifyContent: "center",
@@ -90,6 +83,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     backgroundColor: Colors.thirdColor,
+  },
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: height * 0.06,
+    borderRadius: 10,
+    margin: 10,
+    backgroundColor: Colors.buttonColor,
   },
   text: {
     fontSize: 16,

@@ -12,6 +12,9 @@ import Colors from "@/constants/Colors";
 import { router } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
+import userApiService from "@/services/userApiService";
+import { showFailToast, showSuccesToast } from "@/constants/toasts";
+import Toast from "react-native-toast-message";
 
 const { width, height } = Dimensions.get("window");
 export default function RegisterFiled() {
@@ -21,6 +24,7 @@ export default function RegisterFiled() {
   const [confpassword, setConfPassword] = useState("");
 
   const cretateAccount = async () => {
+
     if (password == confpassword)
       try {
         const res = await createUserWithEmailAndPassword(
@@ -28,11 +32,15 @@ export default function RegisterFiled() {
           email,
           password
         );
-        FIREBASE_AUTH.signOut();
+        const token = await res.user.getIdToken();
+        await userApiService.createUser(token,res.user.uid, name, email,"");
         router.push("/(auth)/login");
+        showSuccesToast("Account created successfully, please verify your email");
       } catch (e) {
         console.log(e);
+        showFailToast("Error creating account");
       }
+    else showFailToast("Passwords do not match");
   };
   return (
     <View style={styles.container}>
@@ -80,9 +88,10 @@ export default function RegisterFiled() {
       >
         <Text style={styles.text}>Have an account?</Text>
       </Pressable>
-      <Pressable style={styles.button}>
+      <Pressable onPress={cretateAccount} style={styles.button}>
         <Text style={styles.text}>Create account</Text>
       </Pressable>
+      <Toast />
     </View>
   );
 }

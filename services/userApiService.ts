@@ -68,7 +68,16 @@ class UserApiService {
       params: { barberUid },
     });
     return response.data;
+  } 
+
+  async getUserName(token: string, uid: string): Promise<string> {
+    const response = await this.axiosInstance.get<string>('/user/getUserName', {
+      headers: { Authorization: token },
+      params: { uid },
+    });
+    return response.data;
   }
+
 }
 
 // Export an instance of the service

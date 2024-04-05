@@ -3,6 +3,7 @@ interface Service{
     serviceName : string;
     servicePrice : number;
     serviceTime : number;
+    
 }
 
 
