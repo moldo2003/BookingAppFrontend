@@ -3,7 +3,7 @@ import { Appointment, WorkDay } from "@/Models/appointmentModel";
 import appointmentApiService from "@/services/appointmentApiService";
 import { isPast, isToday, format } from "date-fns";
 import { useState, useEffect } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity, Button, Alert } from "react-native";
 import Toast from "react-native-toast-message";
 import { StyleSheet, Text } from "react-native";
 import Colors from "@/constants/Colors";
@@ -11,6 +11,7 @@ import { useAuth } from "@/context/auth";
 import { json } from "stream/consumers";
 import { MaterialIcons } from "@expo/vector-icons";
 import userApiService from "@/services/userApiService";
+import { Icon } from "react-native-elements";
 
 export default function BarberHistory() {
   const [date, setDate] = useState(new Date());
@@ -136,22 +137,68 @@ export default function BarberHistory() {
                   justifyContent: "center",
                   alignContent: "center",
                   alignItems: "center",
+                  flexDirection: "row",
                 }}
               >
-                <Text style={styles.apptext}>
-                  {userdictionary[item.clientId] +
-                    " From " +
-                    item.startDate.hour +
-                    ":" +
-                    String(item.startDate.minute).padStart(2, "0") +
-                    " to " +
-                    item.endDate.hour +
-                    ":" +
-                    String(item.endDate.minute).padStart(2, "0")}
-                </Text>
-                <Text style={styles.servicestext}>
-                  {vectorToString(item.services)}
-                </Text>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={styles.apptext}>
+                    {userdictionary[item.clientId] +
+                      " From " +
+                      item.startDate.hour +
+                      ":" +
+                      String(item.startDate.minute).padStart(2, "0") +
+                      " to " +
+                      item.endDate.hour +
+                      ":" +
+                      String(item.endDate.minute).padStart(2, "0")}
+                  </Text>
+                  <Text style={styles.servicestext}>
+                    {vectorToString(item.services)}
+                  </Text>
+                </View>
+                <Icon
+                  name="trash"
+                  type="font-awesome"
+                  color="red"
+                  onPress={() =>
+                    Alert.alert(
+                      "Delete Appointment",
+                      "Are you sure you want to delete this appointment?",
+                      [
+                        {
+                          text: "Cancel",
+                          style: "cancel",
+                        },
+                        {
+                          text: "Yes",
+                          onPress: async () => {
+                            const token =
+                              await FIREBASE_AUTH.currentUser?.getIdToken();
+                            if (item != undefined && token != undefined) {
+                              let res =
+                                await appointmentApiService.forceDeleteAppointment(
+                                  token as string,
+                                  item._id as string
+                                );
+                              if (res == "200") {
+                                let newApp = appointments.filter(
+                                  (app) => app._id != item._id
+                                );
+                                setAppointments(newApp);
+                              }
+                            }
+                          },
+                        },
+                      ]
+                    )
+                  }
+                />
               </View>
             );
           }}

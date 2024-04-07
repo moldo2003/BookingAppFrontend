@@ -1,0 +1,68 @@
+Date : 2024-04-06 18:16:00
+Directory : c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets
+Total : 25 files,  124 codes, -1 comments, -7 blanks, all 116 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         25 |        124 |         -1 |         -7 |        116 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                             | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                |         25 |        124 |         -1 |         -7 |        116 |
+| ..                                                                                               |         14 |       -955 |         -4 |        -66 |     -1,025 |
+| ..\app                                                                                           |         14 |       -955 |         -4 |        -66 |     -1,025 |
+| ..\app (Files)                                                                                   |          1 |        -31 |          0 |         -7 |        -38 |
+| ..\app\(app)                                                                                     |          4 |       -165 |          0 |        -10 |       -175 |
+| ..\app\(app) (Files)                                                                             |          2 |       -104 |          0 |         -5 |       -109 |
+| ..\app\(app)\(tabs)                                                                              |          2 |        -61 |          0 |         -5 |        -66 |
+| ..\app\(auth)                                                                                    |          3 |        -90 |          0 |         -9 |        -99 |
+| ..\app\(booking)                                                                                 |          5 |       -570 |         -4 |        -35 |       -609 |
+| ..\app\(booking) (Files)                                                                         |          2 |        -90 |         -1 |        -11 |       -102 |
+| ..\app\(booking)\(tabs)                                                                          |          3 |       -480 |         -3 |        -24 |       -507 |
+| ..\app\(booking)\(tabs)\getfastestapp                                                            |          1 |       -155 |         -2 |        -10 |       -167 |
+| ..\app\(booking)\(tabs)\serviceselect                                                            |          1 |       -138 |          0 |         -7 |       -145 |
+| ..\app\(booking)\(tabs)\timeselect                                                               |          1 |       -187 |         -1 |         -7 |       -195 |
+| ..\app\(profile)                                                                                 |          1 |        -99 |          0 |         -5 |       -104 |
+| AppHistoryWidgets                                                                                |          2 |        321 |          0 |         17 |        338 |
+| AuthWidgets                                                                                      |          3 |        358 |          0 |         11 |        369 |
+| BarberProfileWidgets                                                                             |          2 |        107 |          0 |          4 |        111 |
+| HomeWidgets                                                                                      |          2 |        166 |          1 |         14 |        181 |
+| TimeSelectWidgets                                                                                |          2 |        127 |          2 |         13 |        142 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                         | language       | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(app)\(tabs)\appointments.tsx             | TypeScript JSX |        -50 |          0 |         -4 |        -54 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(app)\(tabs)\settings.tsx                 | TypeScript JSX |        -11 |          0 |         -1 |        -12 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(app)\_layout.tsx                         | TypeScript JSX |        -49 |          0 |         -2 |        -51 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(app)\index.tsx                           | TypeScript JSX |        -55 |          0 |         -3 |        -58 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(auth)\login.tsx                          | TypeScript JSX |        -30 |          0 |         -3 |        -33 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(auth)\register.tsx                       | TypeScript JSX |        -30 |          0 |         -3 |        -33 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(auth)\reset.tsx                          | TypeScript JSX |        -30 |          0 |         -3 |        -33 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(booking)\(tabs)\getfastestapp\[data].tsx | TypeScript JSX |       -155 |         -2 |        -10 |       -167 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(booking)\(tabs)\serviceselect\[id].tsx   | TypeScript JSX |       -138 |          0 |         -7 |       -145 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(booking)\(tabs)\timeselect\[data].tsx    | TypeScript JSX |       -187 |         -1 |         -7 |       -195 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(booking)\_layout.tsx                     | TypeScript JSX |        -33 |          0 |         -6 |        -39 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(booking)\index.tsx                       | TypeScript JSX |        -57 |         -1 |         -5 |        -63 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\(profile)\[id].tsx                        | TypeScript JSX |        -99 |          0 |         -5 |       -104 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\app\_layout.tsx                               | TypeScript JSX |        -31 |          0 |         -7 |        -38 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\AppHistoryWidgets\barberHistory.tsx    | TypeScript JSX |        197 |          0 |         11 |        208 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\AppHistoryWidgets\clientHistory.tsx    | TypeScript JSX |        124 |          0 |          6 |        130 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\AuthWidgets\logInFiled.tsx             | TypeScript JSX |        105 |          0 |          4 |        109 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\AuthWidgets\registerField.tsx          | TypeScript JSX |        144 |          0 |          5 |        149 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\AuthWidgets\resetFiled.tsx             | TypeScript JSX |        109 |          0 |          2 |        111 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\BarberProfileWidgets\description.tsx   | TypeScript JSX |         59 |          0 |          2 |         61 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\BarberProfileWidgets\gallery.tsx       | TypeScript JSX |         48 |          0 |          2 |         50 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\HomeWidgets\barbersView.tsx            | TypeScript JSX |        106 |          0 |          6 |        112 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\HomeWidgets\photoView.tsx              | TypeScript JSX |         60 |          1 |          8 |         69 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\TimeSelectWidgets\dateDisplay.tsx      | TypeScript JSX |         69 |          2 |          3 |         74 |
+| c:\Users\paulm\Desktop\Aplicatie Alin\FrontendExpo\assets\TimeSelectWidgets\timeDisplay.tsx      | TypeScript JSX |         58 |          0 |         10 |         68 |
+| Total                                                                                            |                |        124 |         -1 |         -7 |        116 |
++--------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

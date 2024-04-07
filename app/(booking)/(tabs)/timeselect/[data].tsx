@@ -57,13 +57,12 @@ export default function TimeSelect() {
     const fetchGapsAvailability = async () => {
       try {
         const token = await FIREBASE_AUTH.currentUser?.getIdToken();
-        //const neededTime =  JSON.parse(data as string).services;
         if (token == undefined) return;
         const res = await appointmentApiService.getAvailableGaps(
           token,
           new GetGapRequest(
             new WorkDay(
-              selectedDate.getDay(),
+              selectedDate.getDate(),
               selectedDate.getMonth() +1 ,
               selectedDate.getFullYear()
             ),
@@ -95,7 +94,7 @@ export default function TimeSelect() {
       const res = await appointmentApiService.createAppointment(token, {
         startDate: JSON.stringify(selectedTime),
         endDate: JSON.stringify(selectedEndTime),
-        day: JSON.stringify(new WorkDay(selectedDate.getDay(), selectedDate.getMonth() +1 , selectedDate.getFullYear())),
+        day: JSON.stringify(new WorkDay(selectedDate.getDate(), selectedDate.getMonth() +1 , selectedDate.getFullYear())),
         clientId: FIREBASE_AUTH.currentUser?.uid as string,
         barberId: JSON.parse(data as string).id,
         services: serviceName,

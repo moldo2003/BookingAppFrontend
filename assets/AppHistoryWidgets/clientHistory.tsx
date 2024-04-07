@@ -3,10 +3,12 @@ import { Appointment } from "@/Models/appointmentModel";
 import appointmentApiService from "@/services/appointmentApiService";
 import { isPast, isToday, format } from "date-fns";
 import { useState, useEffect } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Alert } from "react-native";
 import Toast from "react-native-toast-message";
 import { StyleSheet, Text } from "react-native";
 import Colors from "@/constants/Colors";
+import { Icon } from "react-native-elements";
+import { showFailToast, showSuccesToast } from "@/constants/toasts";
 
 export default function ClientHistory() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -45,6 +47,13 @@ export default function ClientHistory() {
     fetchAppointments();
   }, []);
 
+  function ispast(app: Appointment) {
+    const date = new Date(app.day.year, app.day.month - 1, app.day.day);
+    date.setHours(app.startDate.hour, app.startDate.minute);
+
+    return date.getTime() < new Date().getTime();
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.titletext}>Appointment History</Text>
@@ -67,6 +76,7 @@ export default function ClientHistory() {
             return (
               <View
                 style={{
+                  marginTop: 20,
                   flexDirection: "row",
                   justifyContent: "center",
                   alignContent: "center",
@@ -87,7 +97,51 @@ export default function ClientHistory() {
                     ":" +
                     String(item.endDate.minute).padStart(2, "0")}
                 </Text>
-                <Text style={styles.status}>{status}</Text>
+                {!ispast(item) && (
+                  <Icon
+                    name="trash"
+                    type="font-awesome"
+                    color="red"
+                    onPress={() =>
+                      Alert.alert(
+                        "Delete Appointment",
+                        "Are you sure you want to delete this appointment?",
+                        [
+                          {
+                            text: "Cancel",
+                            style: "cancel",
+                          },
+                          {
+                            text: "Yes",
+                            onPress: async () => {
+                              const token =
+                                await FIREBASE_AUTH.currentUser?.getIdToken();
+                              if (item != undefined && token != undefined) {
+                                let res =
+                                  await appointmentApiService.deleteAppointment(
+                                    token as string,
+                                    item._id as string
+                                  )
+                                  console.log(res);
+                                if (res.status == 200) {
+                                  let newApp = appointments.filter(
+                                    (app) => app._id != item._id
+                                  );
+                                  
+                                  setAppointments(newApp);
+                                  showSuccesToast("Appointment deleted");
+                                } else {
+                                  console.log("adadf");
+                                  showFailToast(res.data);
+                                }
+                              }
+                            },
+                          },
+                        ]
+                      )
+                    }
+                  />
+                )}
               </View>
             );
           }}
@@ -116,7 +170,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 18,
     textAlign: "left",
-    marginTop: 20,
     marginRight: 10,
   },
   status: {
