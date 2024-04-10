@@ -1,0 +1,58 @@
+Date : 2024-04-08 22:34:11
+Directory : d:\Aplicatie alin\frontendAlin\assets
+Total : 24 files,  2408 codes, 12 comments, 164 blanks, all 2584 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         21 |      2,209 |          6 |        126 |      2,341 |
+| TypeScript     |          3 |        199 |          6 |         38 |        243 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                |         24 |      2,408 |         12 |        164 |      2,584 |
+| AppHistoryWidgets                                                                |          2 |        416 |          0 |         20 |        436 |
+| AuthWidgets                                                                      |          3 |        358 |          0 |         11 |        369 |
+| BarberProfileWidgets                                                             |          2 |        107 |          0 |          4 |        111 |
+| HomeWidgets                                                                      |          2 |        183 |          3 |         14 |        200 |
+| SettingsWidgets                                                                  |         13 |      1,217 |          7 |        102 |      1,326 |
+| SettingsWidgets (Files)                                                          |          1 |         94 |          1 |          8 |        103 |
+| SettingsWidgets\functions                                                        |          3 |        199 |          6 |         38 |        243 |
+| SettingsWidgets\modasl                                                           |          9 |        924 |          0 |         56 |        980 |
+| TimeSelectWidgets                                                                |          2 |        127 |          2 |         13 |        142 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                         | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| d:\Aplicatie alin\frontendAlin\assets\AppHistoryWidgets\barberHistory.tsx        | TypeScript JSX |        244 |          0 |         11 |        255 |
+| d:\Aplicatie alin\frontendAlin\assets\AppHistoryWidgets\clientHistory.tsx        | TypeScript JSX |        172 |          0 |          9 |        181 |
+| d:\Aplicatie alin\frontendAlin\assets\AuthWidgets\logInFiled.tsx                 | TypeScript JSX |        105 |          0 |          4 |        109 |
+| d:\Aplicatie alin\frontendAlin\assets\AuthWidgets\registerField.tsx              | TypeScript JSX |        144 |          0 |          5 |        149 |
+| d:\Aplicatie alin\frontendAlin\assets\AuthWidgets\resetFiled.tsx                 | TypeScript JSX |        109 |          0 |          2 |        111 |
+| d:\Aplicatie alin\frontendAlin\assets\BarberProfileWidgets\description.tsx       | TypeScript JSX |         59 |          0 |          2 |         61 |
+| d:\Aplicatie alin\frontendAlin\assets\BarberProfileWidgets\gallery.tsx           | TypeScript JSX |         48 |          0 |          2 |         50 |
+| d:\Aplicatie alin\frontendAlin\assets\HomeWidgets\barbersView.tsx                | TypeScript JSX |        111 |          1 |          7 |        119 |
+| d:\Aplicatie alin\frontendAlin\assets\HomeWidgets\photoView.tsx                  | TypeScript JSX |         72 |          2 |          7 |         81 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\bottommodal.tsx            | TypeScript JSX |         94 |          1 |          8 |        103 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\functions\modifyprofile.ts | TypeScript     |         92 |          5 |         18 |        115 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\functions\modifyservice.ts | TypeScript     |         47 |          0 |          9 |         56 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\functions\photoschange.ts  | TypeScript     |         60 |          1 |         11 |         72 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\addbarber.tsx       | TypeScript JSX |         75 |          0 |          4 |         79 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\changeemail.tsx     | TypeScript JSX |          0 |          0 |          1 |          1 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\changepassword.tsx  | TypeScript JSX |          0 |          0 |          1 |          1 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\changephotos.tsx    | TypeScript JSX |        118 |          0 |          8 |        126 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\deleteuser.tsx      | TypeScript JSX |        112 |          0 |          5 |        117 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\modifyprofile.tsx   | TypeScript JSX |        174 |          0 |         10 |        184 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\modifyservice.tsx   | TypeScript JSX |        207 |          0 |         12 |        219 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\removebarber.tsx    | TypeScript JSX |        113 |          0 |          7 |        120 |
+| d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\verifyuser.tsx      | TypeScript JSX |        125 |          0 |          8 |        133 |
+| d:\Aplicatie alin\frontendAlin\assets\TimeSelectWidgets\dateDisplay.tsx          | TypeScript JSX |         69 |          2 |          3 |         74 |
+| d:\Aplicatie alin\frontendAlin\assets\TimeSelectWidgets\timeDisplay.tsx          | TypeScript JSX |         58 |          0 |         10 |         68 |
+| Total                                                                            |                |      2,408 |         12 |        164 |      2,584 |
++----------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

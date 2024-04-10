@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import Colors from "@/constants/Colors";
 import { router } from "expo-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
 import userApiService from "@/services/userApiService";
 import { showFailToast, showSuccesToast } from "@/constants/toasts";
@@ -33,7 +33,8 @@ export default function RegisterFiled() {
           password
         );
         const token = await res.user.getIdToken();
-        await userApiService.createUser(token,res.user.uid, name, email,"");
+        await sendEmailVerification(res.user);
+        await userApiService.createUser(token,res.user.uid,email, name,"");
         router.push("/(auth)/login");
         showSuccesToast("Account created successfully, please verify your email");
       } catch (e) {
@@ -61,6 +62,7 @@ export default function RegisterFiled() {
       ></TextInput>
       <TextInput
         style={styles.input}
+        autoCapitalize="none"
         placeholder="Password"
         placeholderTextColor={Colors.textColor}
         secureTextEntry={true}
@@ -70,6 +72,7 @@ export default function RegisterFiled() {
 
       <TextInput
         style={styles.input}
+        autoCapitalize="none"
         placeholder="Confirm password"
         placeholderTextColor={Colors.textColor}
         secureTextEntry={true}

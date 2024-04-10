@@ -28,6 +28,7 @@ export default function LogInFiled() {
         value={email}
       ></TextInput>
       <TextInput
+        autoCapitalize="none"
         style={styles.input}
         placeholder="Password"
         placeholderTextColor={Colors.textColor}

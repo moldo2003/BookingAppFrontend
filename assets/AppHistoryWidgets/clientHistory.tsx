@@ -121,17 +121,15 @@ export default function ClientHistory() {
                                   await appointmentApiService.deleteAppointment(
                                     token as string,
                                     item._id as string
-                                  )
-                                  console.log(res);
+                                  );
                                 if (res.status == 200) {
                                   let newApp = appointments.filter(
                                     (app) => app._id != item._id
                                   );
-                                  
+
                                   setAppointments(newApp);
                                   showSuccesToast("Appointment deleted");
                                 } else {
-                                  console.log("adadf");
                                   showFailToast(res.data);
                                 }
                               }

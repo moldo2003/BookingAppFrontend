@@ -27,7 +27,7 @@ export default function Layout() {
       />
       <Stack.Screen
         name="(tabs)/timeselect/[data]"
-        options={{ title: "Slect date" }}
+        options={{ title: "Select date" }}
       />
       <Stack.Screen
         name="(tabs)/getfastestapp/[data]"

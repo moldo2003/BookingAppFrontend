@@ -15,7 +15,7 @@ import BarberHistory from "@/assets/AppHistoryWidgets/barberHistory";
 
 export default function AppointmentsHistory() {
    const {userData} = useAuth();
- 
+
   return (
      userData != undefined ? (userData as User).isBarber ? <BarberHistory /> : <ClientHistory />
      : <Text>Loading...</Text>

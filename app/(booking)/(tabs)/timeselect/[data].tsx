@@ -1,6 +1,13 @@
 import { Service } from "@/Models/barberModel";
 import { router, useLocalSearchParams } from "expo-router";
-import { View, Text, FlatList, Pressable, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Pressable,
+  Dimensions,
+  ActivityIndicator,
+} from "react-native";
 import DateDisplay from "@/assets/TimeSelectWidgets/dateDisplay";
 import { StyleSheet } from "react-native";
 import Colors from "@/constants/Colors";
@@ -14,15 +21,17 @@ import TimeDisplay from "@/assets/TimeSelectWidgets/timeDisplay";
 import { text } from "stream/consumers";
 import { showFailToast, showSuccesToast } from "@/constants/toasts";
 import Toast from "react-native-toast-message";
+import { set } from "date-fns";
 const { width, height } = Dimensions.get("window");
 export default function TimeSelect() {
   const { data } = useLocalSearchParams();
-
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<Time | null>(null);
   const [selectedEndTime, setSelectedEndTime] = useState<Time | null>(null);
   const [dateAvailable, setDateAvailable] = useState<boolean[]>([]);
   const [gapsAvailable, setGapsAvailable] = useState<GetGapResponse[]>([]);
+  const [isBooking, setIsBooking] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const dates = Array.from({ length: 14 }, (_, i) => {
     const date = new Date();
@@ -45,7 +54,9 @@ export default function TimeSelect() {
           JSON.parse(data as string).id,
           neededTime
         );
+       
         setDateAvailable(res); // Assuming you want to set the first boolean value in the array
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
@@ -63,7 +74,7 @@ export default function TimeSelect() {
           new GetGapRequest(
             new WorkDay(
               selectedDate.getDate(),
-              selectedDate.getMonth() +1 ,
+              selectedDate.getMonth() + 1,
               selectedDate.getFullYear()
             ),
             JSON.parse(data as string).id,
@@ -80,33 +91,52 @@ export default function TimeSelect() {
 
   async function bookAppointment() {
     if (selectedTime == null) {
-      showFailToast ("Select a time to book an appointment");
+      showFailToast("Select a time to book an appointment");
       return;
     }
+
     try {
       const token = await FIREBASE_AUTH.currentUser?.getIdToken();
       if (token == undefined) return;
       const servicesArray = JSON.parse(data as string).services as Service[];
       let serviceName = [];
-      for (let i = 0; i < servicesArray.length; i++){
+      for (let i = 0; i < servicesArray.length; i++) {
         serviceName.push(servicesArray[i].serviceName);
       }
       const res = await appointmentApiService.createAppointment(token, {
         startDate: JSON.stringify(selectedTime),
         endDate: JSON.stringify(selectedEndTime),
-        day: JSON.stringify(new WorkDay(selectedDate.getDate(), selectedDate.getMonth() +1 , selectedDate.getFullYear())),
+        day: JSON.stringify(
+          new WorkDay(
+            selectedDate.getDate(),
+            selectedDate.getMonth() + 1,
+            selectedDate.getFullYear()
+          )
+        ),
         clientId: FIREBASE_AUTH.currentUser?.uid as string,
         barberId: JSON.parse(data as string).id,
         services: serviceName,
       });
       router.push("/(app)");
       showSuccesToast("Appointment booked");
+      return;
     } catch (error) {
       console.error("Error booking appointment", error);
       showFailToast("Error booking appointment, try another time");
+      return;
     }
   }
-  return (
+  return isLoading ? (
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: Colors.backgroundColor,
+    
+    }}>
+      <ActivityIndicator size="large" color="white"/>
+    </View>
+  ) : (
     <View style={styles.container}>
       <Text style={styles.text}>Select an Date</Text>
       <FlatList
@@ -149,9 +179,14 @@ export default function TimeSelect() {
       />
       <Pressable
         style={styles.button}
-        onPress={() => {
-          bookAppointment();
+        onPress={async () => {
+          if (!isBooking) {
+            setIsBooking(true);
+            await bookAppointment();
+            setIsBooking(false);
+          }
         }}
+        disabled={isBooking}
       >
         <Text style={styles.buttontext}>Book now</Text>
       </Pressable>

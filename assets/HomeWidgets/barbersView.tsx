@@ -2,7 +2,7 @@ import { Barber } from "@/Models/barberModel";
 import Colors from "@/constants/Colors";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
 import userApiService, { baseURL } from "@/services/userApiService";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -18,33 +18,42 @@ import {
 export default function BarbersView() {
   const [barbers, setBarbers] = useState<Barber[]>([]);
 
-  useEffect(() => {
-    const fetchBarbers = async () => {
-      try {
-        const token = await FIREBASE_AUTH.currentUser?.getIdToken();
-        if (token == undefined) return;
-        const barbersData = await userApiService.getBarbers(token);
-        setBarbers(barbersData);
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
-    };
-    fetchBarbers();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchBarbers = async () => {
+        try {
+          const token = await FIREBASE_AUTH.currentUser?.getIdToken();
+          if (token == undefined) return;
+          const barbersData = await userApiService.getBarbers(token);
+          setBarbers(barbersData);
+        } catch (error) {
+          console.error("Error fetching images:", error);
+        }
+      };
+      fetchBarbers();
+
+      // Optional: Return a cleanup function to be called when the component is unmounted or the screen goes out of focus.
+      return () => {
+        setBarbers([]);
+      };
+    }, [])
+  );
 
   const renderitem = ({ barber, index }: { barber: Barber; index: number }) => {
-    let imgUrl = baseURL + "/images/" + barber.profilePic
-    
-    if(barber.profilePic == ""){
-       imgUrl = "https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg";
+    let imgUrl = baseURL + "/images/" + barber.profilePic;
+
+    if (barber.profilePic == "") {
+      imgUrl =
+        "https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg";
     }
     return (
-      <Pressable onPress={() => {router.push(`/(profile)/${barber.firebaseUid}`)}}>
+      <Pressable
+        onPress={() => {
+          router.push(`/(profile)/${barber.firebaseUid}`);
+        }}
+      >
         <View style={style.barberviewcontainer}>
-          <Image
-            style={style.image}
-            source={{ uri: imgUrl }}
-          />
+          <Image style={style.image} source={{ uri: imgUrl }} />
           <View>
             <Text style={style.barbernametext}>{barber.username}</Text>
             <Text style={style.barberdescriptiontext}>
@@ -56,28 +65,26 @@ export default function BarbersView() {
     );
   };
 
-  return (
-    barbers.length===0 ? (
-      <ActivityIndicator size="large" color="white" /> // This is the loading screen
-    ) : (
+  return barbers.length === 0 ? (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size="large" color="white" /> 
+    </View>
+  ) : (
     <View style={{ flex: 1 }}>
       <Text style={style.titletext}>Our Barbers</Text>
       {barbers.length > 0 && (
         <FlatList
           keyExtractor={(item) => item.firebaseUid}
           data={barbers}
-          renderItem={({ item, index }) =>
-            renderitem({ barber: item, index })
-          }
+          renderItem={({ item, index }) => renderitem({ barber: item, index })}
         />
       )}
     </View>
-    )
   );
 }
 const style = StyleSheet.create({
-  container:{
-      height: 400,
+  container: {
+    height: 400,
   },
   titletext: {
     fontSize: 20,
