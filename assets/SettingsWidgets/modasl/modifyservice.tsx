@@ -116,8 +116,9 @@ export default function ModifyService() {
                   name="trash-bin"
                   size={24}
                   color="#B22222"
-                  onPress={() => {
-                    modifyservice.deleteService(item.serviceName);
+                  onPress={async () => {
+                    await modifyservice.deleteService(item.serviceName);
+                    await fetchServices();
                   }}
                 />
               </View>
