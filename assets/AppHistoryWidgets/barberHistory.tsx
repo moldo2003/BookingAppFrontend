@@ -148,7 +148,7 @@ export default function BarberHistory() {
                   }}
                 >
                   <Text style={styles.apptext}>
-                    {userdictionary[item.clientId] +
+                    { (item.isBlocking? "Break" : userdictionary[item.clientId]) +
                       " From " +
                       item.startDate.hour +
                       ":" +

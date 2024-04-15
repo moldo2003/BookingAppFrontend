@@ -20,11 +20,12 @@ class AppointmentApiService {
     barberId: string,
     services: string[]
   ): Promise<Appointment> {
+    const date = new Date();
     const response = await this.axiosInstance.get<Appointment>(
       "/appointment/getFastestAppointment",
       {
         headers: { Authorization: token },
-        params: { neededTime, clientId, barberId, services },
+        params: { neededTime, clientId, barberId, services,date },
       }
     );
     return response.data;

@@ -20,7 +20,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const rootSegment = useSegments();
   const router = useRouter();
   const [user, setUser] = React.useState<string | undefined>("");
-  const [userData, setUserData] = React.useState<User | undefined>(); // [1
+  const [userData, setUserData] = React.useState<User | undefined>(undefined); // [1
   const auth = FIREBASE_AUTH;
 
   React.useEffect(() => {

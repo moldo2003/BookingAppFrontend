@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
@@ -11,6 +11,7 @@ import { User } from "@/Models/userModel";
 export default function Settings() {
   const [modalVisible, setModalVisible] = useState(ModalType.None); // State to manage modal visibility
   const { userData } = useAuth();
+
   // Function to show the modal
   const showModal = (modalType: ModalType) => {
     setModalVisible(modalType);
@@ -22,6 +23,7 @@ export default function Settings() {
   };
 
   return (
+    (userData  !== undefined)&&
     <ScrollView style={styles.container}>
       <Text style={styles.titleText}>Arogant Studio</Text>
       <Pressable onPress={() => showModal(ModalType.ChangePassword)}>
@@ -45,7 +47,7 @@ export default function Settings() {
             <Text style={styles.text}>Remove barber</Text>
           </Pressable>
           <Pressable onPress={() => showModal(ModalType.ChangePhotos)}>
-            <Text style={styles.text}>Change photos</Text>
+            <Text style={styles.text}>Salon setings</Text>
           </Pressable>
         </>
       )}
@@ -56,6 +58,9 @@ export default function Settings() {
           </Pressable>
           <Pressable onPress={() => showModal(ModalType.ModifyServices)}>
             <Text style={styles.text}>Modify services</Text>
+          </Pressable>
+          <Pressable onPress={() => showModal(ModalType.TimeBlock)}>
+            <Text style={styles.text}>Block Times</Text>
           </Pressable>
         </>
       )}

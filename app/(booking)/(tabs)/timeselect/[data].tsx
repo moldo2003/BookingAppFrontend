@@ -54,7 +54,7 @@ export default function TimeSelect() {
           JSON.parse(data as string).id,
           neededTime
         );
-       
+
         setDateAvailable(res); // Assuming you want to set the first boolean value in the array
         setIsLoading(false);
       } catch (error) {
@@ -66,6 +66,10 @@ export default function TimeSelect() {
 
   useEffect(() => {
     const fetchGapsAvailability = async () => {
+      if (selectedDate.getDay() == 0) {
+        setGapsAvailable([]);
+        return;
+      }
       try {
         const token = await FIREBASE_AUTH.currentUser?.getIdToken();
         if (token == undefined) return;
@@ -127,23 +131,28 @@ export default function TimeSelect() {
     }
   }
   return isLoading ? (
-    <View style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: Colors.backgroundColor,
-    
-    }}>
-      <ActivityIndicator size="large" color="white"/>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: Colors.backgroundColor,
+      }}
+    >
+      <ActivityIndicator size="large" color="white" />
     </View>
   ) : (
     <View style={styles.container}>
       <Text style={styles.text}>Select an Date</Text>
       <FlatList
-        style={{ height: "25%" }}
+        style={{
+          height: height * 0.2,
+          flexGrow: 0,
+        }}
         data={dates}
         renderItem={({ item, index }) => (
           <Pressable
+            style={{height: "100%"}}
             onPress={() => {
               setSelectedDate(item);
             }}
@@ -160,23 +169,27 @@ export default function TimeSelect() {
         showsHorizontalScrollIndicator={false}
       />
       <Text style={styles.text}>Select a Time</Text>
-      <FlatList
-        data={gapsAvailable}
-        renderItem={({ item }) => (
-          <Pressable
-            onPress={() => {
-              setSelectedTime(item.startDate);
-              setSelectedEndTime(item.endDate);
-            }}
-          >
-            <TimeDisplay
-              start={item.startDate}
-              end={item.endDate}
-              isSelected={item.startDate === selectedTime}
-            />
-          </Pressable>
-        )}
-      />
+      {gapsAvailable.length != 0 ? null : (
+        <Text style={styles.text}>No available times</Text>
+      )}
+        <FlatList
+          data={gapsAvailable}
+          renderItem={({ item }) => (
+            <Pressable
+              onPress={() => {
+                setSelectedTime(item.startDate);
+                setSelectedEndTime(item.endDate);
+              }}
+            >
+              <TimeDisplay
+                start={item.startDate}
+                end={item.endDate}
+                isSelected={item.startDate === selectedTime}
+              />
+            </Pressable>
+          )}
+        />
+
       <Pressable
         style={styles.button}
         onPress={async () => {
@@ -205,6 +218,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Jakarta",
     fontSize: 20,
+  },
+  text2: {
+    margin: 10,
+    color: "white",
+    fontFamily: "Jakarta",
+    fontSize: 20,
+    height: "100%",
   },
 
   button: {

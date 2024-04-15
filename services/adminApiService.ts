@@ -54,6 +54,20 @@ class AdminApiService {
       params: { photo },
     });
   }
+
+  async getTimes (token: string) {
+    return this.axiosInstance.get("/admin/getTimes", {
+      headers: { Authorization: token },
+    });
+  }
+  async setTimes (token: string, startTime: string, endTime: string) {
+    return this.axiosInstance.post("/admin/setTimes",{}, {
+      headers: { Authorization: token },
+      params: { start:startTime, end:endTime },
+    });
+  }
+
+  
 }
 
 export default new AdminApiService();

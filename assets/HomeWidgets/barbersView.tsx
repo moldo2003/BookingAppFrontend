@@ -29,7 +29,7 @@ export default function BarbersView() {
         } catch (error) {
           console.error("Error fetching images:", error);
         }
-      };
+       };
       fetchBarbers();
 
       // Optional: Return a cleanup function to be called when the component is unmounted or the screen goes out of focus.

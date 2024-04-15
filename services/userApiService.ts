@@ -4,7 +4,7 @@ import { User } from '@/Models/userModel';
 import { Barber ,Service} from '@/Models/barberModel';
 
 // Define the base URL
-export const baseURL = "http://192.168.100.16:3000";
+export const baseURL = "http://192.168.102.223:3000";
 
 // Create an Axios instance with the base URL
 const axiosInstance: AxiosInstance = axios.create({

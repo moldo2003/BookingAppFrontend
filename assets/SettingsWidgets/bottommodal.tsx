@@ -15,6 +15,8 @@ import { DeletBarber } from "./modasl/removebarber";
 import { ChangePhotos } from "./modasl/changephotos";
 import ModifyProfile from "./modasl/modifyprofile";
 import ModifyService from "./modasl/modifyservice";
+import Toast from "react-native-toast-message";
+import TimeBlock from "./modasl/timeblock";
 
 export enum ModalType {
   None,
@@ -27,6 +29,7 @@ export enum ModalType {
   ChangePhotos,
   ModifyProfile,
   ModifyServices,
+  TimeBlock
 }
 
 interface BottomModalProps {
@@ -55,6 +58,8 @@ const BottomModal: React.FC<BottomModalProps> = ({ visible, onClose }) => {
         return <ModifyProfile />;
       case ModalType.ModifyServices:
         return <ModifyService />;
+      case ModalType.TimeBlock:
+          return <TimeBlock />
       // Add more cases for additional modals
       default:
         return null;
@@ -74,8 +79,9 @@ const BottomModal: React.FC<BottomModalProps> = ({ visible, onClose }) => {
       </TouchableWithoutFeedback>
       <View style={styles.modalContainer}>
         {renderModalContent()}
-        
+        <Toast />
       </View>
+      
     </Modal>
     </View>
   );
