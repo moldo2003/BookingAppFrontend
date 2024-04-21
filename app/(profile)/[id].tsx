@@ -5,7 +5,7 @@ import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
 import { Barber } from "@/Models/barberModel";
 import userApiService, { baseURL } from "@/services/userApiService";
 import { Ionicons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -22,7 +22,8 @@ export default function BarberProfile() {
   const { id } = useLocalSearchParams();
   const [barber, setBarber] = useState<Barber | undefined>(undefined);
 
-  useEffect(() => {
+  useFocusEffect(
+    React.useCallback(() => {
     const fetchBarber = async () => {
       try {
         const token = await FIREBASE_AUTH.currentUser?.getIdToken();
@@ -39,7 +40,7 @@ export default function BarberProfile() {
       }
     };
     fetchBarber();
-  }, []);
+  }, []));
   return (
     <SafeAreaView style={styles.container}>
       {barber && (

@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   usertext2: {
     fontSize: 12,
-
+    color: "white",
     fontFamily: "Jakarta",
   },
   userContainer: {

@@ -6,12 +6,13 @@ import barberApiService from "@/services/barberApiService";
 import { useState } from "react";
 import { View, Text, Dimensions, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+// import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const { width, height } = Dimensions.get("window");
 
 export default function TimeBlock() {
-  const [selectedStartTime, setSelectedStartTime] = useState(new Date());
+  const [selectedStartTime, setSelectedStartTime] = useState(new Date()); 
   const [selectedEndTime, setSelectedEndTime] = useState(new Date());
   const [isPickerVisible, setPickerVisible] = useState(false);
   const [isStartTime, setIsStartTime] = useState(true);
@@ -95,13 +96,19 @@ export default function TimeBlock() {
           }
           try {
             const token = await FIREBASE_AUTH.currentUser?.getIdToken();
-            const start = new Time(selectedStartTime.getHours(), selectedStartTime.getMinutes());
-            const end = new Time(selectedEndTime.getHours(), selectedEndTime.getMinutes());
+            const start = new Time(
+              selectedStartTime.getHours(),
+              selectedStartTime.getMinutes()
+            );
+            const end = new Time(
+              selectedEndTime.getHours(),
+              selectedEndTime.getMinutes()
+            );
             await barberApiService.blockTime(
               token as string,
               selectedDate,
-             start,
-             end
+              start,
+              end
             );
             showSuccesToast("Time blocked successfully");
           } catch (e) {
@@ -112,22 +119,30 @@ export default function TimeBlock() {
         <Text style={styles.textbutton}>Block this time</Text>
       </Pressable>
 
-      <DateTimePickerModal
-        date={isStartTime ? selectedStartTime : selectedEndTime}
-        isVisible={isPickerVisible}
-        mode="time"
-        onConfirm={handleConfirm}
-        onCancel={hidePicker}
-      />
+      {isPickerVisible && (
+        <DateTimePicker
+          mode="time"
+          display="spinner"
+          value={isStartTime ? selectedStartTime : selectedEndTime}
+          onChange={(event, date) => {
+            handleConfirm(date as Date);
+          }}
+        />
+      )}
 
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleDateConfirm}
-        onCancel={hideDatePicker}
-      />
+      {isDatePickerVisible && (
+        <DateTimePicker
+          mode="date"
+          display="spinner"
+          value={isStartTime ? selectedStartTime : selectedEndTime}
+          onChange={(event, date) => {
+            handleDateConfirm(date as Date);
+          }}
+        />
+      )}
+
     </View>
-  );
+  ); 
 }
 
 const styles = StyleSheet.create({

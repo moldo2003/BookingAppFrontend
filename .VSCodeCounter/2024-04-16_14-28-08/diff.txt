@@ -1,0 +1,57 @@
+Date : 2024-04-16 14:28:08
+Directory : d:\Aplicatie alin\frontendAlin\app
+Total : 18 files,  764 codes, 88 comments, 20 blanks, all 872 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         14 |      1,094 |         93 |         74 |      1,261 |
+| TypeScript     |          4 |       -330 |         -5 |        -54 |       -389 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| (app)                                                                        |          4 |        250 |          2 |         16 |        268 |
+| (app) (Files)                                                                |          2 |        104 |          0 |          5 |        109 |
+| (app)\(tabs)                                                                 |          2 |        146 |          2 |         11 |        159 |
+| (auth)                                                                       |          3 |         90 |          0 |          9 |         99 |
+| (booking)                                                                    |          5 |        623 |          4 |         37 |        664 |
+| (booking) (Files)                                                            |          2 |         90 |          1 |         11 |        102 |
+| (booking)\(tabs)                                                             |          3 |        533 |          3 |         26 |        562 |
+| (booking)\(tabs)\getfastestapp                                               |          1 |        155 |          2 |         10 |        167 |
+| (booking)\(tabs)\serviceselect                                               |          1 |        138 |          0 |          7 |        145 |
+| (booking)\(tabs)\timeselect                                                  |          1 |        240 |          1 |          9 |        250 |
+| (profile)                                                                    |          1 |        100 |          0 |          5 |        105 |
+| .                                                                            |         18 |        764 |         88 |         20 |        872 |
+| . (Files)                                                                    |          1 |         31 |         87 |          7 |        125 |
+| ..                                                                           |          4 |       -330 |         -5 |        -54 |       -389 |
+| ..\services                                                                  |          4 |       -330 |         -5 |        -54 |       -389 |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                     | language       | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| d:\Aplicatie alin\frontendAlin\app\(app)\(tabs)\appointments.tsx             | TypeScript JSX |         50 |          0 |          4 |         54 |
+| d:\Aplicatie alin\frontendAlin\app\(app)\(tabs)\settings.tsx                 | TypeScript JSX |         96 |          2 |          7 |        105 |
+| d:\Aplicatie alin\frontendAlin\app\(app)\_layout.tsx                         | TypeScript JSX |         49 |          0 |          2 |         51 |
+| d:\Aplicatie alin\frontendAlin\app\(app)\index.tsx                           | TypeScript JSX |         55 |          0 |          3 |         58 |
+| d:\Aplicatie alin\frontendAlin\app\(auth)\login.tsx                          | TypeScript JSX |         30 |          0 |          3 |         33 |
+| d:\Aplicatie alin\frontendAlin\app\(auth)\register.tsx                       | TypeScript JSX |         30 |          0 |          3 |         33 |
+| d:\Aplicatie alin\frontendAlin\app\(auth)\reset.tsx                          | TypeScript JSX |         30 |          0 |          3 |         33 |
+| d:\Aplicatie alin\frontendAlin\app\(booking)\(tabs)\getfastestapp\[data].tsx | TypeScript JSX |        155 |          2 |         10 |        167 |
+| d:\Aplicatie alin\frontendAlin\app\(booking)\(tabs)\serviceselect\[id].tsx   | TypeScript JSX |        138 |          0 |          7 |        145 |
+| d:\Aplicatie alin\frontendAlin\app\(booking)\(tabs)\timeselect\[data].tsx    | TypeScript JSX |        240 |          1 |          9 |        250 |
+| d:\Aplicatie alin\frontendAlin\app\(booking)\_layout.tsx                     | TypeScript JSX |         33 |          0 |          6 |         39 |
+| d:\Aplicatie alin\frontendAlin\app\(booking)\index.tsx                       | TypeScript JSX |         57 |          1 |          5 |         63 |
+| d:\Aplicatie alin\frontendAlin\app\(profile)\[id].tsx                        | TypeScript JSX |        100 |          0 |          5 |        105 |
+| d:\Aplicatie alin\frontendAlin\app\_layout.tsx                               | TypeScript JSX |         31 |         87 |          7 |        125 |
+| d:\Aplicatie alin\frontendAlin\services\adminApiService.ts                   | TypeScript     |        -49 |          0 |        -11 |        -60 |
+| d:\Aplicatie alin\frontendAlin\services\appointmentApiService.ts             | TypeScript     |       -162 |         -1 |        -15 |       -178 |
+| d:\Aplicatie alin\frontendAlin\services\barberApiService.ts                  | TypeScript     |        -54 |          0 |        -12 |        -66 |
+| d:\Aplicatie alin\frontendAlin\services\userApiService.ts                    | TypeScript     |        -65 |         -4 |        -16 |        -85 |
+| Total                                                                        |                |        764 |         88 |         20 |        872 |
++------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

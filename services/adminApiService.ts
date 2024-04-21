@@ -60,10 +60,10 @@ class AdminApiService {
       headers: { Authorization: token },
     });
   }
-  async setTimes (token: string, startTime: string, endTime: string) {
+  async setTimes (token: string, startTime: string, endTime: string , saturdayEnd: string) {
     return this.axiosInstance.post("/admin/setTimes",{}, {
       headers: { Authorization: token },
-      params: { start:startTime, end:endTime },
+      params: { start:startTime, end:endTime , saturdayEnd:saturdayEnd},
     });
   }
 

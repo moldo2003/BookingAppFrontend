@@ -1,0 +1,31 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "comment", "blank", "total"
+"d:\Aplicatie alin\frontendAlin\assets\AppHistoryWidgets\barberHistory.tsx", "TypeScript JSX", 0, -244, 0, -11, -255
+"d:\Aplicatie alin\frontendAlin\assets\AppHistoryWidgets\clientHistory.tsx", "TypeScript JSX", 0, -172, 0, -9, -181
+"d:\Aplicatie alin\frontendAlin\assets\AuthWidgets\logInFiled.tsx", "TypeScript JSX", 0, -106, 0, -4, -110
+"d:\Aplicatie alin\frontendAlin\assets\AuthWidgets\registerField.tsx", "TypeScript JSX", 0, -147, 0, -5, -152
+"d:\Aplicatie alin\frontendAlin\assets\AuthWidgets\resetFiled.tsx", "TypeScript JSX", 0, -109, 0, -2, -111
+"d:\Aplicatie alin\frontendAlin\assets\BarberProfileWidgets\description.tsx", "TypeScript JSX", 0, -59, 0, -2, -61
+"d:\Aplicatie alin\frontendAlin\assets\BarberProfileWidgets\gallery.tsx", "TypeScript JSX", 0, -48, 0, -2, -50
+"d:\Aplicatie alin\frontendAlin\assets\HomeWidgets\barbersView.tsx", "TypeScript JSX", 0, -111, -1, -7, -119
+"d:\Aplicatie alin\frontendAlin\assets\HomeWidgets\photoView.tsx", "TypeScript JSX", 0, -72, -2, -7, -81
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\bottommodal.tsx", "TypeScript JSX", 0, -100, -3, -10, -113
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\functions\modifyprofile.ts", "TypeScript", -92, 0, -5, -18, -115
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\functions\modifyservice.ts", "TypeScript", -68, 0, 0, -8, -76
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\functions\photoschange.ts", "TypeScript", -60, 0, -1, -11, -72
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\addbarber.tsx", "TypeScript JSX", 0, -75, 0, -4, -79
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\changeemail.tsx", "TypeScript JSX", 0, 0, 0, -1, -1
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\changepassword.tsx", "TypeScript JSX", 0, 0, 0, -1, -1
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\changephotos.tsx", "TypeScript JSX", 0, -289, -13, -23, -325
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\deleteuser.tsx", "TypeScript JSX", 0, -112, 0, -5, -117
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\modifyprofile.tsx", "TypeScript JSX", 0, -174, 0, -10, -184
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\modifyservice.tsx", "TypeScript JSX", 0, -208, 0, -12, -220
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\removebarber.tsx", "TypeScript JSX", 0, -113, 0, -7, -120
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\timeblock.tsx", "TypeScript JSX", 0, -165, -1, -19, -185
+"d:\Aplicatie alin\frontendAlin\assets\SettingsWidgets\modasl\verifyuser.tsx", "TypeScript JSX", 0, -125, 0, -8, -133
+"d:\Aplicatie alin\frontendAlin\assets\TimeSelectWidgets\dateDisplay.tsx", "TypeScript JSX", 0, -69, -2, -3, -74
+"d:\Aplicatie alin\frontendAlin\assets\TimeSelectWidgets\timeDisplay.tsx", "TypeScript JSX", 0, -58, 0, -10, -68
+"d:\Aplicatie alin\frontendAlin\services\adminApiService.ts", "TypeScript", 60, 0, 0, 14, 74
+"d:\Aplicatie alin\frontendAlin\services\appointmentApiService.ts", "TypeScript", 163, 0, 1, 15, 179
+"d:\Aplicatie alin\frontendAlin\services\barberApiService.ts", "TypeScript", 76, 0, 0, 14, 90
+"d:\Aplicatie alin\frontendAlin\services\userApiService.ts", "TypeScript", 65, 0, 4, 16, 85
+"Total", "-", 144, -2556, -23, -140, -2575

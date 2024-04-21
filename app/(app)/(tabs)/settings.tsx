@@ -23,52 +23,53 @@ export default function Settings() {
   };
 
   return (
-    (userData  !== undefined)&&
-    <ScrollView style={styles.container}>
-      <Text style={styles.titleText}>Arogant Studio</Text>
-      <Pressable onPress={() => showModal(ModalType.ChangePassword)}>
-        <Text style={styles.text}>Change password</Text>
-      </Pressable>
-      <Pressable onPress={() => showModal(ModalType.ChangeEmail)}>
-        <Text style={styles.text}>Change email</Text>
-      </Pressable>
-      {(userData as User).isAdmin && (
-        <>
-          <Pressable onPress={() => showModal(ModalType.VerifyUser)}>
-            <Text style={styles.text}>Verify User</Text>
-          </Pressable>
-          <Pressable onPress={() => showModal(ModalType.DeleteUser)}>
-            <Text style={styles.text}>Delete User</Text>
-          </Pressable>
-          <Pressable onPress={() => showModal(ModalType.AddBarber)}>
-            <Text style={styles.text}>Add barber</Text>
-          </Pressable>
-          <Pressable onPress={() => showModal(ModalType.RemoveBarber)}>
-            <Text style={styles.text}>Remove barber</Text>
-          </Pressable>
-          <Pressable onPress={() => showModal(ModalType.ChangePhotos)}>
-            <Text style={styles.text}>Salon setings</Text>
-          </Pressable>
-        </>
-      )}
-      {(userData as User).isBarber && (
-        <>
-          <Pressable onPress={() => showModal(ModalType.ModifyProfile)}>
-            <Text style={styles.text}>Modify profile</Text>
-          </Pressable>
-          <Pressable onPress={() => showModal(ModalType.ModifyServices)}>
-            <Text style={styles.text}>Modify services</Text>
-          </Pressable>
-          <Pressable onPress={() => showModal(ModalType.TimeBlock)}>
-            <Text style={styles.text}>Block Times</Text>
-          </Pressable>
-        </>
-      )}
-      <Pressable onPress={() => FIREBASE_AUTH.signOut()}>
-        <Text style={styles.textred}>Sign out</Text>
-      </Pressable> 
-      <BottomModal visible={modalVisible} onClose={hideModal} />
-    </ScrollView>
+    userData !== undefined && (
+      <ScrollView style={styles.container}>
+        <Text style={styles.titleText}>Arogant Studio</Text>
+        <Pressable onPress={() => showModal(ModalType.ChangePassword)}>
+          <Text style={styles.text}>Change password</Text>
+        </Pressable>
+        <Pressable onPress={() => showModal(ModalType.ChangeEmail)}>
+          <Text style={styles.text}>Change email</Text>
+        </Pressable>
+        {(userData as User).isAdmin && (
+          <>
+            <Pressable onPress={() => showModal(ModalType.VerifyUser)}>
+              <Text style={styles.text}>Verify User</Text>
+            </Pressable>
+            <Pressable onPress={() => showModal(ModalType.DeleteUser)}>
+              <Text style={styles.text}>Delete User</Text>
+            </Pressable>
+            <Pressable onPress={() => showModal(ModalType.AddBarber)}>
+              <Text style={styles.text}>Add barber</Text>
+            </Pressable>
+            <Pressable onPress={() => showModal(ModalType.RemoveBarber)}>
+              <Text style={styles.text}>Remove barber</Text>
+            </Pressable>
+            <Pressable onPress={() => showModal(ModalType.ChangePhotos)}>
+              <Text style={styles.text}>Salon setings</Text>
+            </Pressable>
+          </>
+        )}
+        {(userData as User).isBarber && (
+          <>
+            <Pressable onPress={() => showModal(ModalType.ModifyProfile)}>
+              <Text style={styles.text}>Modify profile</Text>
+            </Pressable>
+            <Pressable onPress={() => showModal(ModalType.ModifyServices)}>
+              <Text style={styles.text}>Modify services</Text>
+            </Pressable>
+            <Pressable onPress={() => showModal(ModalType.TimeBlock)}>
+              <Text style={styles.text}>Block Times</Text>
+            </Pressable>
+          </>
+        )}
+        <Pressable onPress={() => FIREBASE_AUTH.signOut()}>
+          <Text style={styles.textred}>Sign out</Text>
+        </Pressable>
+        <BottomModal visible={modalVisible} onClose={hideModal} />
+      </ScrollView>
+    )
   );
 }
 

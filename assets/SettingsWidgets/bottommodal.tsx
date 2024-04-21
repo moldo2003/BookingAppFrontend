@@ -12,11 +12,13 @@ import Colors from "@/constants/Colors";
 import { DeletUser } from "./modasl/deleteuser";
 import { AddBarber } from "./modasl/addbarber";
 import { DeletBarber } from "./modasl/removebarber";
-import { ChangePhotos } from "./modasl/changephotos";
+//import { ChangePhotos } from "./modasl/changephotos";
 import ModifyProfile from "./modasl/modifyprofile";
 import ModifyService from "./modasl/modifyservice";
 import Toast from "react-native-toast-message";
+import { ChangePhotos } from "./modasl/changephotos";
 import TimeBlock from "./modasl/timeblock";
+//import TimeBlock from "./modasl/timeblock";
 
 export enum ModalType {
   None,
@@ -53,13 +55,15 @@ const BottomModal: React.FC<BottomModalProps> = ({ visible, onClose }) => {
       case ModalType.RemoveBarber:
         return <DeletBarber />;
       case ModalType.ChangePhotos:
-        return <ChangePhotos onClose={onClose }/>;
+         return <ChangePhotos onClose={onClose }/>;
+        
       case ModalType.ModifyProfile:
         return <ModifyProfile />;
       case ModalType.ModifyServices:
         return <ModifyService />;
       case ModalType.TimeBlock:
           return <TimeBlock />
+          
       // Add more cases for additional modals
       default:
         return null;

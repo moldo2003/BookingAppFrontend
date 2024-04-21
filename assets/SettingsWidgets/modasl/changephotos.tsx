@@ -14,14 +14,16 @@ import { StyleSheet } from "react-native";
 import Colors from "@/constants/Colors";
 import { useEffect, useState } from "react";
 import { baseURL } from "@/services/userApiService";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import adminApiService from "@/services/adminApiService";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
 import { json } from "stream/consumers";
-import { parseJSON } from "date-fns";
+import { parseJSON, set } from "date-fns";
 import { Time } from "@/Models/appointmentModel";
 import { showFailToast, showSuccesToast } from "@/constants/toasts";
 import Toast from "react-native-toast-message";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 
 const { width, height } = Dimensions.get("window");
 
@@ -33,6 +35,7 @@ export function ChangePhotos({
   const [photos, setPhotos] = useState<string[]>([]);
   const [selectedStartTime, setSelectedStartTime] = useState(new Date());
   const [selectedEndTime, setSelectedEndTime] = useState(new Date());
+  const [selectedSaturdayTime, setSelectedSaturdayTime] = useState(new Date());
 
   const fetchData = async () => {
     try {
@@ -40,10 +43,10 @@ export function ChangePhotos({
       setPhotos(res);
       const token = await FIREBASE_AUTH.currentUser?.getIdToken();
       const times = await adminApiService.getTimes(token as string);
-
       // Create new Date objects for the start and end times
       const startTime = new Date();
       const endTime = new Date();
+      const saturdayEnd = new Date();
 
       // Set the hours and minutes based on the times object
       startTime.setHours(
@@ -51,21 +54,30 @@ export function ChangePhotos({
         times.data.startTime.minute
       );
       endTime.setHours(times.data.endTime.hour, times.data.endTime.minute);
+      saturdayEnd.setHours(
+        times.data.saturdayEndTime.hour,
+        times.data.saturdayEndTime.minute
+      );
 
       // Update the state with the new start and end times
       setSelectedStartTime(startTime);
       setSelectedEndTime(endTime);
+      setSelectedSaturdayTime(saturdayEnd);
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+      return () => {};
+    }, [])
+  );
 
   const [isPickerVisible, setPickerVisible] = useState(false);
-  const [isStartTime, setIsStartTime] = useState(true);
+  const [isStartTime, setIsStartTime] = useState(false);
+  const [isSaturdayTime, setIsSaturdayTime] = useState(false);
 
   const showPicker = () => {
     setPickerVisible(true);
@@ -76,9 +88,24 @@ export function ChangePhotos({
   };
 
   const handleConfirm = (datetime: Date) => {
-    if (isStartTime) setSelectedStartTime(datetime);
-    else setSelectedEndTime(datetime);
+    if (isStartTime) {
+      setSelectedStartTime(datetime);
+    } else if (isSaturdayTime) {
+      setSelectedSaturdayTime(datetime);
+    } else {
+      setSelectedEndTime(datetime);
+    }
     hidePicker();
+  };
+
+  const getPickerValue = () => {
+    if (isStartTime) {
+      return selectedStartTime;
+    } else if (isSaturdayTime) {
+      return selectedSaturdayTime;
+    } else {
+      return selectedEndTime;
+    }
   };
 
   const renderItem = ({ item, index }: { item: string; index: number }) => {
@@ -128,6 +155,7 @@ export function ChangePhotos({
       <View style={{ flex: 1, alignSelf: "stretch", paddingTop: 10 }}>
         <Pressable
           onPress={() => {
+            setIsSaturdayTime(false);
             setIsStartTime(true);
             showPicker();
           }}
@@ -144,6 +172,7 @@ export function ChangePhotos({
         <Pressable
           onPress={() => {
             setIsStartTime(false);
+            setIsSaturdayTime(false);
             showPicker();
           }}
         >
@@ -157,14 +186,29 @@ export function ChangePhotos({
         </Pressable>
 
         <Pressable
+          onPress={() => {
+            setIsStartTime(false);
+            setIsSaturdayTime(true);
+            showPicker();
+          }}
+        >
+          <Text style={styles.timetext}>
+            Select Saturday End Time:{" "}
+            {new Intl.DateTimeFormat("default", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }).format(selectedSaturdayTime)}
+          </Text>
+        </Pressable>
+
+        <Pressable
           style={styles.button}
           onPress={async () => {
-            
-            if(selectedStartTime >= selectedEndTime) {
+            if (selectedStartTime >= selectedEndTime) {
               showFailToast("Start time should be less than end time");
               return;
             }
-          
+
             try {
               const token = await FIREBASE_AUTH.currentUser?.getIdToken();
               const start = new Time(
@@ -175,10 +219,15 @@ export function ChangePhotos({
                 selectedEndTime.getHours(),
                 selectedEndTime.getMinutes()
               );
+              const s = new Time(
+                selectedSaturdayTime.getHours(),
+                selectedSaturdayTime.getMinutes()
+              );
               await adminApiService.setTimes(
                 token as string,
                 JSON.stringify(start),
-                JSON.stringify(end)
+                JSON.stringify(end),
+                JSON.stringify(s)
               );
               showSuccesToast("Times updated successfully");
             } catch (error) {
@@ -191,13 +240,14 @@ export function ChangePhotos({
         </Pressable>
       </View>
 
-      <DateTimePickerModal
-        date={isStartTime ? selectedStartTime : selectedEndTime}
-        isVisible={isPickerVisible}
-        mode="time"
-        onConfirm={handleConfirm}
-        onCancel={hidePicker}
-      />
+      {isPickerVisible && (
+        <DateTimePicker
+          mode="time"
+          display="spinner"
+          value={getPickerValue()}
+          onChange={(event, date) => handleConfirm(date as Date)}
+        />
+      )}
 
       <Text style={styles.title}>Change Photos</Text>
       {photos.length !== 0 ? (
@@ -261,3 +311,11 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+
+/*<DateTimePickerModal
+date={isStartTime ? selectedStartTime : selectedEndTime}
+isVisible={isPickerVisible}
+mode="time"
+onConfirm={handleConfirm}
+onCancel={hidePicker}
+/>*/
