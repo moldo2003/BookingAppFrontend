@@ -5,6 +5,7 @@ import Colors from "@/constants/Colors";
 import { useState } from "react";
 
 const { width, height } = Dimensions.get("window");
+
 export default function DateDisplay({
   date,
   isAvailable,
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "Jakarta",
     color: "white",
-    // Add your titleText styles here
   },
   buttonText: {
     textAlign: "center",
@@ -68,6 +68,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "Jakarta",
     color: "white",
-    // Add your buttonText styles here
   },
 });

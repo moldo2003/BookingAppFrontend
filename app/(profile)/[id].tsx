@@ -14,6 +14,7 @@ import {
   Image,
   Dimensions,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -24,25 +25,27 @@ export default function BarberProfile() {
 
   useFocusEffect(
     React.useCallback(() => {
-    const fetchBarber = async () => {
-      try {
-        const token = await FIREBASE_AUTH.currentUser?.getIdToken();
-        if (token == undefined) return;
-        const barbersData = await userApiService.getBarbers(token);
+      const fetchBarber = async () => {
+        try {
+          const token = await FIREBASE_AUTH.currentUser?.getIdToken();
+          if (token == undefined) return;
+          const barbersData = await userApiService.getBarbers(token);
 
-        barbersData.forEach((barber) => {
-          if (barber.firebaseUid === id) {
-            setBarber(barber);
-          }
-        });
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
-    };
-    fetchBarber();
-  }, []));
+          barbersData.forEach((barber) => {
+            if (barber.firebaseUid === id) {
+              setBarber(barber);
+            }
+          });
+        } catch (error) {
+          console.error("Error fetching images:", error);
+        }
+      };
+      fetchBarber();
+    }, [])
+  );
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       {barber && (
         <>
           <Pressable
@@ -62,12 +65,20 @@ export default function BarberProfile() {
           </Pressable>
           <Image
             style={styles.avatar}
-            source={{ uri: baseURL + "/images/" + barber?.profilePic }} // replace with your image URL
+            source={{
+              uri:
+                baseURL +
+                "/images/" +
+                (barber?.profilePic != ""
+                  ? barber.profilePic
+                  : "https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg"),
+            }} // replace with your image URL
           />
           <BarberDescription barber={barber as Barber} />
           <BarberGallery barber={barber as Barber} />
         </>
       )}
+      </ScrollView>
     </SafeAreaView>
   );
 }
