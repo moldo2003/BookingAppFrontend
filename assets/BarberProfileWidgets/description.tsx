@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   secondTitiel: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.thirdColor,
+    color: Colors.textColor,
     fontFamily: "Jakarta",
   },
   description: {
