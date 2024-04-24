@@ -152,7 +152,7 @@ export default function TimeSelect() {
         data={dates}
         renderItem={({ item, index }) => (
           <Pressable
-            style={{height: "100%"}}
+            style={{ height: "100%" }}
             onPress={() => {
               setSelectedDate(item);
             }}
@@ -172,23 +172,25 @@ export default function TimeSelect() {
       {gapsAvailable.length != 0 ? null : (
         <Text style={styles.text}>No available times</Text>
       )}
-        <FlatList
-          data={gapsAvailable}
-          renderItem={({ item }) => (
-            <Pressable
-              onPress={() => {
-                setSelectedTime(item.startDate);
-                setSelectedEndTime(item.endDate);
-              }}
-            >
-              <TimeDisplay
-                start={item.startDate}
-                end={item.endDate}
-                isSelected={item.startDate === selectedTime}
-              />
-            </Pressable>
-          )}
-        />
+      <FlatList
+        data={gapsAvailable}
+        renderItem={({ item }) => (
+          <Pressable
+            onPress={() => {
+              setSelectedTime(item.startDate);
+              setSelectedEndTime(item.endDate);
+            }}
+          >
+            <TimeDisplay
+              start={item.startDate}
+              end={item.endDate}
+              isSelected={item.startDate === selectedTime}
+            />
+          </Pressable>
+        )}
+      />
+
+      <View style={{ height: 50 }} />
 
       <Pressable
         style={styles.button}

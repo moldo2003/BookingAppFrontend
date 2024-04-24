@@ -42,7 +42,7 @@ export const CarouselWidget = () => {
     // <Image onError={(w) => console.log(w)} source={{ uri: baseURL + "/images/Salon/" + item }} style={styles.image} />
     return (
       <View>
-        <Image style={styles.image} source={{ uri: baseURL + "/images/Salon/" + item }} />
+        <Image style={styles.image} source={{ uri: baseURL + "/images/Salon/" + item } }/>
       </View>
     );
   };
