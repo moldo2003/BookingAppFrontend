@@ -14,7 +14,6 @@ export default function Layout() {
         headerTintColor: Colors.textColor,
         
       }}
-      
     >
             <Stack.Screen
         name="index"
@@ -22,7 +21,8 @@ export default function Layout() {
       />
       <Stack.Screen
         name="(tabs)/serviceselect/[id]"
-        options={{ title: "Select services" ,}}
+        options={{ title: "Select services" }}
+        
 
       />
       <Stack.Screen
