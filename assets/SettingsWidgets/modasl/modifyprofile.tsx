@@ -16,6 +16,8 @@ import {
 import { StyleSheet } from "react-native";
 import modifyprofile from "../functions/modifyprofile";
 import { baseURL } from "@/services/userApiService";
+import { showFailToast, showSuccesToast } from "@/constants/toasts";
+import Toast from "react-native-toast-message";
 
 const { width, height } = Dimensions.get("window");
 export default function ModifyProfile() {
@@ -54,9 +56,14 @@ export default function ModifyProfile() {
                 {
                   text: "Delete",
                   onPress: async () => {
-                    await modifyprofile.removePhotoFromGallery(item);
-                    const res = await modifyprofile.getBarberPhotos();
-                    setPhotos(res);
+                    try {
+                      await modifyprofile.removePhotoFromGallery(item);
+                      const res = await modifyprofile.getBarberPhotos();
+                      setPhotos(res);
+                      showSuccesToast("Photo deleted successfully");
+                    } catch (error) {
+                      showFailToast("Error deleting photo");
+                    }
                   },
                 },
               ]
@@ -90,7 +97,12 @@ export default function ModifyProfile() {
       <Pressable
         style={styles.button}
         onPress={async () => {
-          modifyprofile.changeSmallDescription(smallDescription);
+          try {
+            modifyprofile.changeSmallDescription(smallDescription);
+            showSuccesToast("Small Description changed successfully");
+          } catch (error) {
+            showFailToast("Error changing small description");
+          }
         }}
       >
         <Text style={styles.textbutton}>Change Small Description</Text>
@@ -106,7 +118,12 @@ export default function ModifyProfile() {
       <Pressable
         style={styles.button}
         onPress={async () => {
-          modifyprofile.changeBigDescription(bigDescription);
+          try {
+            modifyprofile.changeBigDescription(bigDescription);
+            showSuccesToast("Big Description changed successfully");
+          } catch (error) {
+            showFailToast("Error changing big description");
+          }
         }}
       >
         <Text style={styles.textbutton}>Change Big Description</Text>
@@ -115,7 +132,12 @@ export default function ModifyProfile() {
       <Pressable
         style={styles.button}
         onPress={async () => {
-          modifyprofile.changeProfilePicture();
+          try {
+            await modifyprofile.changeProfilePicture();
+            showSuccesToast("Profile picture changed successfully");
+          } catch (error) {
+            showFailToast("Error changing profile picture");
+          }
         }}
       >
         <Text style={styles.textbutton}>Change Profile Picture</Text>
@@ -140,8 +162,9 @@ export default function ModifyProfile() {
           scrollEnabled={false}
         />
       ) : (
-        <Text>No photos to display</Text>
+        <Text style={styles.text}>No photos to display</Text>
       )}
+      <Toast />
     </ScrollView>
   );
 }

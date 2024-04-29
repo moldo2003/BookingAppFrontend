@@ -18,6 +18,7 @@ import ModifyService from "./modasl/modifyservice";
 import Toast from "react-native-toast-message";
 import { ChangePhotos } from "./modasl/changephotos";
 import TimeBlock from "./modasl/timeblock";
+import { ChangeEmail } from "./modasl/changeemail";
 //import TimeBlock from "./modasl/timeblock";
 
 export enum ModalType {
@@ -45,7 +46,7 @@ const BottomModal: React.FC<BottomModalProps> = ({ visible, onClose }) => {
       case ModalType.ChangePassword:
         return <Text>Modal 1 content</Text>;
       case ModalType.ChangeEmail:
-        return <Text>Modal 2 content</Text>;
+        return <ChangeEmail />;
       case ModalType.VerifyUser:
         return <VerifyUser />;
       case ModalType.DeleteUser:

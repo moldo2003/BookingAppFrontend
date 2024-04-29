@@ -45,6 +45,7 @@ class ProfileModel {
     FileSystem.readAsStringAsync(result.assets[0].uri, {
       encoding: FileSystem.EncodingType.Base64,
     }).then(async (base64Image) => {
+      try{
       await axios.post(
         `${this.apiLink}/barber/changeProfilePic`,
         {
@@ -58,6 +59,10 @@ class ProfileModel {
           },
         }
       );
+      return;
+    } catch (error) {
+      throw new Error("Error changing profile picture");
+    }
     });
 
     // Send the POST reques

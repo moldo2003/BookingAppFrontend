@@ -44,21 +44,25 @@ class PhotoModel {
       if (!result.canceled) {
         FileSystem.readAsStringAsync(result.assets[0].uri, {
           encoding: FileSystem.EncodingType.Base64,
-        }).then(async (base64Image) => 
-          {
-          await axios.post(
-            `${baseURL}/admin/addPhoto`,
-            {
-              photo: base64Image,
-              photoname: result.assets[0].uri.split("/").pop(),
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: token,
+        }).then(async (base64Image) => {
+          try {
+            await axios.post(
+              `${baseURL}/admin/addPhoto`,
+              {
+                photo: base64Image,
+                photoname: result.assets[0].uri.split("/").pop(),
               },
-            }
-          );
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: token,
+                },
+              }
+            );
+            return;
+          } catch (e) {
+            throw new Error("Error adding photo");
+          }
         });
       }
     } catch (e) {

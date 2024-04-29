@@ -17,7 +17,7 @@ import {
 
 export default function BarbersView() {
   const [barbers, setBarbers] = useState<Barber[]>([]);
-
+  const [loading, setLoading] = useState(true);
   useFocusEffect(
     React.useCallback(() => {
       const fetchBarbers = async () => {
@@ -26,7 +26,9 @@ export default function BarbersView() {
           if (token == undefined) return;
           const barbersData = await userApiService.getBarbers(token);
           setBarbers(barbersData);
+          setLoading(false);
         } catch (error) {
+          setLoading(false);
           console.error("Error fetching images:", error);
         }
        };
@@ -65,11 +67,16 @@ export default function BarbersView() {
     );
   };
 
-  return barbers.length === 0 ? (
+  return loading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ActivityIndicator size="large" color="white" /> 
     </View>
-  ) : (
+  ) : 
+   barbers.length === 0 ? (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" , height: "100%" , backgroundColor: Colors.backgroundColor}}>
+      <Text style={style.titletext}>No Barbers Available</Text>
+    </View>
+   ) : (
     <View style={{ flex: 1 }}>
       <Text style={style.titletext}>Our Barbers</Text>
       {barbers.length > 0 && (

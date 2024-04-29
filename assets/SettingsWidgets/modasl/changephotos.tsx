@@ -258,14 +258,19 @@ export function ChangePhotos({
           scrollEnabled={false}
         />
       ) : (
-        <Text>No photos to display</Text>
+        <Text style={styles.timetext}>No photos to display</Text>
       )}
 
       <Pressable
         style={styles.button}
         onPress={async () => {
-          await photoschange.addPhoto();
-          fetchData();
+          try {
+            await photoschange.addPhoto();
+            fetchData();
+            showSuccesToast("Photo added successfully");
+          } catch (error) {
+            showFailToast("Error adding photo");
+          }
         }}
       >
         <Text style={styles.textbutton}>Upload photo</Text>

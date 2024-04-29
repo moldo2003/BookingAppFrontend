@@ -4,7 +4,7 @@ import { User } from "@/Models/userModel";
 import userApiService from "@/services/userApiService";
 import { useRouter, useSegments } from "expo-router";
 import { FirebaseError } from "firebase/app";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import * as React from "react";
 import Toast from "react-native-toast-message";
 

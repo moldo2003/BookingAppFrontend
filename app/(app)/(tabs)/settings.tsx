@@ -15,6 +15,9 @@ import Colors from "@/constants/Colors";
 import BottomModal, { ModalType } from "@/assets/SettingsWidgets/bottommodal";
 import { useAuth } from "@/context/auth";
 import { User } from "@/Models/userModel";
+import { sendPasswordResetEmail, updateEmail } from "firebase/auth";
+import { showFailToast, showSuccesToast } from "@/constants/toasts";
+import Toast from "react-native-toast-message";
 const { width, height } = Dimensions.get("window");
 export default function Settings() {
   const [modalVisible, setModalVisible] = useState(ModalType.None); // State to manage modal visibility
@@ -30,15 +33,28 @@ export default function Settings() {
     setModalVisible(ModalType.None);
   };
 
+  async function sendPasswordChange(){
+    if(FIREBASE_AUTH.currentUser !== null)
+      try{
+        await sendPasswordResetEmail(FIREBASE_AUTH, FIREBASE_AUTH.currentUser?.email ?? "")
+        showSuccesToast("Password reset email sent")
+      }catch(e){
+        showFailToast("Error",)
+      }
+    else{
+      showFailToast("Error",)
+    }
+  }
+
   return userData !== undefined ? (
     <View>
       <ScrollView style={styles.container}>
         <View style={{ height: 50 }} />
-        <Pressable onPress={() => showModal(ModalType.ChangePassword)}>
-          <Text style={styles.text}>Change password</Text>
+        <Pressable onPress={() => {sendPasswordChange()}}>
+          <Text style={styles.text}>Send password reset link</Text>
         </Pressable>
-        <Pressable onPress={() => showModal(ModalType.ChangeEmail)}>
-          <Text style={styles.text}>Change email</Text>
+        <Pressable onPress={() => {showModal(ModalType.ChangeEmail)}}>
+          <Text style={styles.text}>Change email </Text>
         </Pressable>
         {(userData as User).isAdmin && (
           <>
@@ -85,6 +101,7 @@ export default function Settings() {
         resizeMethod="scale"
         resizeMode="contain"
       />
+      <Toast />
     </View>
   ) : (
     <View
