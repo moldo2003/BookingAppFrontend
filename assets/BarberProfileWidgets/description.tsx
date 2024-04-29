@@ -1,18 +1,34 @@
 import Colors from "@/constants/Colors";
+import { showFailToast } from "@/constants/toasts";
+import { useAuth } from "@/context/auth";
 import { Barber } from "@/Models/barberModel";
 import { router } from "expo-router";
 import { View, Text, Pressable, StyleSheet, Dimensions } from "react-native";
+import Toast from "react-native-toast-message";
 const { width, height } = Dimensions.get("window");
 export default function BarberDescription({ barber }: { barber: Barber }) {
+  const { userData } = useAuth();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{barber.username}</Text>
       <Text style={styles.secondTitiel}>{barber.smallDescription}</Text>
-      <Pressable style={styles.button} onPress={() => router.push(`/(booking)/(tabs)/serviceselect/${barber.firebaseUid}`)}>
+      <Pressable
+        style={styles.button}
+        onPress={() => {
+          if (userData.isValidated == false) {
+            showFailToast("The account is not validated yet");
+          } else {
+            router.push(
+              `/(booking)/(tabs)/serviceselect/${barber.firebaseUid}`
+            );
+          }
+        }}
+      >
         <Text style={styles.text}>Book Now</Text>
       </Pressable>
       <Text style={styles.title}>About</Text>
       <Text style={styles.description}>{barber.bigDescription}</Text>
+
     </View>
   );
 }

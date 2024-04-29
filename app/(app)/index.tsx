@@ -1,6 +1,8 @@
 import BarbersView from "@/assets/HomeWidgets/barbersView";
 import { CarouselWidget } from "@/assets/HomeWidgets/photoView";
 import Colors from "@/constants/Colors";
+import { showFailToast } from "@/constants/toasts";
+import { useAuth } from "@/context/auth";
 import { router } from "expo-router";
 
 import React from "react";
@@ -10,6 +12,7 @@ import Toast from "react-native-toast-message";
 import { Header } from "react-native/Libraries/NewAppScreen";
 const { width, height } = Dimensions.get("window");
 export default function Home() {
+  const { userData } = useAuth();
   return (
     <SafeAreaView style={style.container}>
       <Image
@@ -23,7 +26,11 @@ export default function Home() {
       <Pressable
         style={style.button}
         onPress={() => {
+          if(userData.isValidated == false){
+            showFailToast("The account is not validated yet");
+          }else{
           router.push("/(booking)/");
+          }
         }}
       >
         <Text style={style.text}>Book Now</Text>

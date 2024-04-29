@@ -1,5 +1,7 @@
 import Colors from "@/constants/Colors";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
+import { showFailToast } from "@/constants/toasts";
+import { useAuth } from "@/context/auth";
 import { Barber } from "@/Models/barberModel";
 import userApiService, { baseURL } from "@/services/userApiService";
 import { router } from "expo-router";
@@ -9,6 +11,8 @@ import { StyleSheet } from "react-native";
 const { width, height } = Dimensions.get("window");
 export default function BarberSelect() {
   const [barbers, setBarbers] = useState<Barber[]>([]);
+  const { userData } = useAuth();
+
 
   useEffect(() => {
     const fetchBarbers = async () => {
