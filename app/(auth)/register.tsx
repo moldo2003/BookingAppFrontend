@@ -11,8 +11,8 @@ import Toast from "react-native-toast-message";
 export default function Register() {
     return (
         <View style={styles.container}>
-            <Toast />
             <RegisterFiled ></RegisterFiled>
+            <Toast />
         </View>
     );
     }

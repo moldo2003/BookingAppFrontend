@@ -46,7 +46,7 @@ export default function BarberProfile() {
   );
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.container}> 
       {barber && (
         <>
           <Pressable
@@ -77,9 +77,10 @@ export default function BarberProfile() {
           />
           <BarberDescription barber={barber as Barber} />
           <BarberGallery barber={barber as Barber} />
+
         </>
       )}
-      </ScrollView>
+       </ScrollView>
       <Toast />
     </SafeAreaView>
   );

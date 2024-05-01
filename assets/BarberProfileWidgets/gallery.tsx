@@ -31,7 +31,7 @@ export default function BarberGallery({ barber }: { barber: Barber }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Gallery</Text>
-       <FlatList data={barber.photos} renderItem={renderItem} numColumns={2}  scrollEnabled={false}/>
+       <FlatList data={barber.photos} renderItem={renderItem} numColumns={2} scrollEnabled={false}/>
     </View>
   );
 }

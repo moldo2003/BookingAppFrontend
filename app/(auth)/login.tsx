@@ -11,8 +11,9 @@ export default function Login() {
     const {signIn}  = useAuth();
     return (
         <View style={styles.container}>
-            <Toast />
+            
             <LogInFiled></LogInFiled>
+            <Toast />
         </View>
     );
     }

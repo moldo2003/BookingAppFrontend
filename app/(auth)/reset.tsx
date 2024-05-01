@@ -11,8 +11,8 @@ import Toast from "react-native-toast-message";
 export default function Reset() {
     return (
         <View style={styles.container}>
-            <Toast />
             <ResetFiled/>
+            <Toast />
         </View>
     );
     }
