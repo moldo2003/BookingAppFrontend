@@ -13,6 +13,7 @@ export default function Layout() {
         tabBarStyle: {
           backgroundColor: Colors.backgroundColor2,
           borderColor: Colors.backgroundColor2,
+          borderTopWidth: 0,
         },
         tabBarInactiveTintColor: "white",
         tabBarActiveTintColor: Colors.buttonColor,

@@ -3,12 +3,14 @@ import { useFonts } from "expo-font";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import React, { useCallback } from "react";
 import Toast from "react-native-toast-message";
+import { Dimensions, Platform, View, Text } from "react-native";
+import Colors from "@/constants/Colors";
 
 export default function Layout() {
   const [fontsLoaded, fontError] = useFonts({
     Jakarta: require("../assets/fonts/Plus_Jakarta_Sans/Jakarta.ttf"),
   });
-
+  const { width, height } = Dimensions.get("window");
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
@@ -19,8 +21,7 @@ export default function Layout() {
     return null;
   }
 
-  return (
-    
+  return ((Platform.OS === "web" && width < height ) || Platform.OS=="android" )? (
     <AuthProvider>
       <Stack
         screenOptions={{
@@ -28,11 +29,26 @@ export default function Layout() {
           animation: "slide_from_bottom",
           animationDuration: 30,
         }}
-      > 
+      >
         <Stack.Screen name="(app)" options={{ animation: "ios" }} />
-      </Stack> 
+      </Stack>
     </AuthProvider>
-  
+  ) : (
+    <View
+      style={{
+        backgroundColor: Colors.backgroundColor,
+        flex: 1,
+        justifyContent: "center",
+        alignContent: "center",
+      }}
+    >
+      <Text style={{
+        color: Colors.textColor,
+        fontSize: 20,
+        textAlign: "center"
+
+      }}>App not supported Pc, use the app on your phone</Text>
+    </View>
   );
 }
 
@@ -122,4 +138,4 @@ void loop() {
   distServo.write(pos);
   delay(15);
 }
-*/ 
+*/

@@ -250,6 +250,7 @@ export function ChangePhotos({
       )}
 
       <Text style={styles.title}>Change Photos</Text>
+      <View>
       {photos.length !== 0 ? (
         <FlatList
           data={photos}
@@ -260,7 +261,7 @@ export function ChangePhotos({
       ) : (
         <Text style={styles.timetext}>No photos to display</Text>
       )}
-
+      </View>
       <Pressable
         style={styles.button}
         onPress={async () => {

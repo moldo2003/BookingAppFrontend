@@ -6,6 +6,7 @@ import userApiService, { baseURL } from "@/services/userApiService";
 import adminApiService from "@/services/adminApiService";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
+import { Platform } from "react-native";
 
 class PhotoModel {
   async getPhotos(): Promise<string[]> {
@@ -40,30 +41,42 @@ class PhotoModel {
         aspect: [4, 3],
         quality: 1,
       });
-
+  
       if (!result.canceled) {
-        FileSystem.readAsStringAsync(result.assets[0].uri, {
-          encoding: FileSystem.EncodingType.Base64,
-        }).then(async (base64Image) => {
-          try {
-            await axios.post(
-              `${baseURL}/admin/addPhoto`,
-              {
-                photo: base64Image,
-                photoname: result.assets[0].uri.split("/").pop(),
+        let base64Image;
+        if (Platform.OS === 'web') {
+          const response = await fetch(result.assets[0].uri);
+          const blob = await response.blob();
+          base64Image = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+        } else {
+          base64Image = await FileSystem.readAsStringAsync(result.assets[0].uri, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+        }
+  
+        try {
+          await axios.post(
+            `${baseURL}/admin/addPhoto`,
+            {
+              photo: base64Image,
+              photoname: result.assets[0].uri.split("/").pop(),
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
               },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: token,
-                },
-              }
-            );
-            return;
-          } catch (e) {
-            throw new Error("Error adding photo");
-          }
-        });
+            }
+          );
+          return;
+        } catch (e) {
+          throw new Error("Error adding photo");
+        }
       }
     } catch (e) {
       console.log(e);

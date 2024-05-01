@@ -8,16 +8,17 @@ export default function Layout() {
       
       screenOptions={{
         animation: "slide_from_right",
-        headerStyle: {
+        headerStyle: {      
           backgroundColor: Colors.backgroundColor,
         },
         headerTintColor: Colors.textColor,
-        
+        headerShadowVisible: false,
+      
       }}
     >
             <Stack.Screen
         name="index"
-        options={{ title: "Select a Barber" }}
+        options={{ title: "Select a Barber" ,}}
       />
       <Stack.Screen
         name="(tabs)/serviceselect/[id]"

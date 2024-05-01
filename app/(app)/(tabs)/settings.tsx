@@ -47,7 +47,7 @@ export default function Settings() {
   }
 
   return userData !== undefined ? (
-    <View>
+    <View style = {{height:"100%"}}>
       <ScrollView style={styles.container}>
         <View style={{ height: 50 }} />
         <Pressable onPress={() => {sendPasswordChange()}}>
@@ -128,9 +128,10 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   container: {
+    height: "100%",
+    flex: 1,
     padding: 20,
     backgroundColor: Colors.backgroundColor,
-    height: "100%",
   },
   text: {
     marginTop: 20,

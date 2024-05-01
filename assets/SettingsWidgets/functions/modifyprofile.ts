@@ -5,6 +5,7 @@ import { Buffer } from "buffer";
 import { FIREBASE_AUTH } from "@/constants/firebaseConfig";
 import barberApiService from "@/services/barberApiService";
 import { baseURL } from "@/services/userApiService";
+import { Platform } from "react-native";
 
 class ProfileModel {
   apiLink = baseURL; // replace with your base URL
@@ -42,29 +43,37 @@ class ProfileModel {
 
     if (result.canceled) return;
 
-    FileSystem.readAsStringAsync(result.assets[0].uri, {
-      encoding: FileSystem.EncodingType.Base64,
-    }).then(async (base64Image) => {
-      try{
-      await axios.post(
-        `${this.apiLink}/barber/changeProfilePic`,
-        {
-          photo: base64Image,
-          photoname: result.assets[0].uri.split("/").pop(),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      );
-      return;
-    } catch (error) {
-      throw new Error("Error changing profile picture");
+    let base64Image;
+    if (Platform.OS === 'web') {
+      const response = await fetch(result.assets[0].uri);
+      const blob = await response.blob();
+      base64Image = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    } else {
+      base64Image = await FileSystem.readAsStringAsync(result.assets[0].uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
     }
-    });
-
+  
+    await axios.post(
+      `${this.apiLink}/barber/changeProfilePic`,
+      {
+        photo: base64Image,
+        photoname: result.assets[0].uri.split("/").pop(),
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+  
+    return;
     // Send the POST reques
   }
 
@@ -82,23 +91,35 @@ class ProfileModel {
 
     if (result.canceled) return;
 
-    await FileSystem.readAsStringAsync(result.assets[0].uri, {
-      encoding: FileSystem.EncodingType.Base64,
-    }).then(async (base64Image) => {
-      await axios.post(
-        `${this.apiLink}/barber/addPhoto`,
-        {
-          photo: base64Image,
-          photoname: result.assets[0].uri.split("/").pop(),
+    let base64Image;
+    if (Platform.OS === 'web') {
+      const response = await fetch(result.assets[0].uri);
+      const blob = await response.blob();
+      base64Image = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    } else {
+      base64Image = await FileSystem.readAsStringAsync(result.assets[0].uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+    }
+    
+    await axios.post(
+      `${this.apiLink}/barber/addPhoto`,
+      {
+        photo: base64Image,
+        photoname: result.assets[0].uri.split("/").pop(),
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      );
-    });
+      }
+    );
 
     return;
   }
